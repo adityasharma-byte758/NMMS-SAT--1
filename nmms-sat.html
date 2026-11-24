@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Winstudy Point — NMMS SAT (90 प्रश्न) मॉक टेस्ट</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Noto Sans Devanagari', 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+    .palette-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+    .palette-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Student Name Entry Screen -->
+  <section id="startScreen" class="min-h-screen flex items-center justify-center p-4 bg-slate-50">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-md max-w-md w-full p-6 sm:p-8">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-11 h-11 rounded-xl bg-blue-900 text-white flex items-center justify-center font-bold text-base shrink-0 shadow-sm">
+          WP
+        </div>
+        <div>
+          <div class="text-sm font-bold tracking-wide text-blue-900 uppercase">Winstudy Point</div>
+          <div class="text-xs text-slate-500">Dir:- Aditya Kumar</div>
+        </div>
+      </div>
+
+      <h1 class="text-xl sm:text-2xl font-bold text-slate-900 leading-snug">NMMS SAT (90 प्रश्न) मॉक टेस्ट</h1>
+      <p class="text-sm text-slate-600 mt-1.5">विज्ञान (35) + सामाजिक विज्ञान (35) + गणित (20) • कक्षा 8</p>
+
+      <div class="grid grid-cols-3 gap-2 my-5 text-center">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+          <div class="text-sm font-bold text-slate-900">90</div>
+          <div class="text-xs text-slate-500">प्रश्न</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+          <div class="text-sm font-bold text-slate-900">90 मिनट</div>
+          <div class="text-xs text-slate-500">समय</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+          <div class="text-sm font-bold text-emerald-700">फ्री</div>
+          <div class="text-xs text-slate-500">तुरंत रिज़ल्ट</div>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <label for="studentNameInput" class="block text-sm font-semibold text-slate-800">अपना पूरा नाम लिखें (Student Name) *</label>
+        <input id="studentNameInput" type="text" placeholder="जैसे: राहुल कुमार" autocomplete="name"
+          class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm sm:text-base text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:border-blue-800" />
+        <p id="nameError" class="hidden text-xs font-medium text-rose-600">कृपया टेस्ट शुरू करने से पहले अपना नाम दर्ज करें।</p>
+      </div>
+
+      <button id="startTestBtn" type="button"
+        class="mt-5 w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold text-sm sm:text-base py-3 rounded-xl shadow-sm transition cursor-pointer">
+        टेस्ट शुरू करें →
+      </button>
+    </div>
+  </section>
+
+  <!-- Sticky Top Header -->
+  <header id="testHeader" class="hidden sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-9 h-9 rounded-xl bg-blue-900 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+          WP
+        </div>
+        <div class="min-w-0">
+          <h1 class="text-sm sm:text-base font-bold text-slate-900 truncate">Winstudy Point • NMMS SAT</h1>
+          <p id="headerStudentMeta" class="text-xs text-slate-500 truncate">Dir:- Aditya Kumar • 90 प्रश्न</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Timer -->
+        <div id="timerBox" class="flex items-center gap-1.5 bg-slate-100 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-800 tabular-nums">
+          <svg class="w-4 h-4 text-blue-800 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span id="timerDisplay">90:00</span>
+          <button id="timerToggleBtn" type="button" class="ml-1 text-xs font-medium text-blue-700 hover:text-blue-900 underline" title="Pause/Resume">रोकें</button>
+        </div>
+
+        <!-- Submit / Retake Button -->
+        <button id="topActionBtn" type="button" class="bg-blue-900 hover:bg-blue-800 text-white text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-lg shadow-sm transition cursor-pointer">
+          सबमिट करें
+        </button>
+      </div>
+    </div>
+
+    <!-- Progress & Controls Bar -->
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 pb-2.5 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-2">
+      <div class="flex items-center gap-1.5 overflow-x-auto">
+        <button type="button" data-section="all" class="sec-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-900 text-white transition cursor-pointer whitespace-nowrap">सभी (90)</button>
+        <button type="button" data-section="science" class="sec-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition cursor-pointer whitespace-nowrap">विज्ञान (35)</button>
+        <button type="button" data-section="social" class="sec-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition cursor-pointer whitespace-nowrap">सामाजिक विज्ञान (35)</button>
+        <button type="button" data-section="maths" class="sec-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition cursor-pointer whitespace-nowrap">गणित (20)</button>
+      </div>
+
+      <div class="flex items-center gap-3 text-xs">
+        <span id="progressText" class="font-semibold text-slate-700 tabular-nums">हल किए: 0 / 90</span>
+        <div id="viewToggleGroup" class="inline-flex rounded-lg bg-slate-100 p-0.5 border border-slate-200">
+          <button id="modeSingleBtn" type="button" class="px-2 py-1 rounded-md text-xs font-semibold bg-white text-blue-900 shadow-sm cursor-pointer">एक-एक प्रश्न</button>
+          <button id="modeListBtn" type="button" class="px-2 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 cursor-pointer">पूरी सूची</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="mainContent" class="hidden flex-1 max-w-5xl w-full mx-auto px-3 sm:px-6 py-5">
+
+    <!-- Result Summary Panel -->
+    <section id="resultSection" class="hidden mb-6 space-y-4">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200">Winstudy Point • NMMS SAT परिणाम</span>
+              <span id="scoreStudentNameBadge" class="inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-900 border border-amber-200"></span>
+            </div>
+            <h2 id="scoreHeadline" class="text-2xl sm:text-3xl font-bold text-slate-900 tabular-nums">0 / 90 अंक</h2>
+            <p id="scoreSubtext" class="text-sm text-slate-600 mt-1">सटीकता: 0% • समय: 00:00</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button id="retakeBtn" type="button" class="bg-blue-900 hover:bg-blue-800 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm transition cursor-pointer">
+              फिर से टेस्ट दें
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Stat Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3">
+            <div class="text-xs font-medium text-emerald-700">सही उत्तर</div>
+            <div id="statCorrect" class="text-xl font-bold text-emerald-900 tabular-nums mt-0.5">0</div>
+          </div>
+          <div class="bg-rose-50 border border-rose-200 rounded-xl p-3">
+            <div class="text-xs font-medium text-rose-700">गलत उत्तर</div>
+            <div id="statWrong" class="text-xl font-bold text-rose-900 tabular-nums mt-0.5">0</div>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+            <div class="text-xs font-medium text-slate-600">छोड़े गए</div>
+            <div id="statSkipped" class="text-xl font-bold text-slate-800 tabular-nums mt-0.5">0</div>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-3">
+            <div class="text-xs font-medium text-amber-800">प्रतिशत (Score %)</div>
+            <div id="statPercent" class="text-xl font-bold text-amber-900 tabular-nums mt-0.5">0%</div>
+          </div>
+        </div>
+
+        <!-- Section Breakdown -->
+        <div class="mt-5 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div class="bg-slate-50 rounded-lg p-3 border border-slate-200 flex items-center justify-between">
+            <span class="font-semibold text-slate-700">विज्ञान (35)</span>
+            <span id="secScoreScience" class="font-bold text-blue-900 tabular-nums">0 / 35</span>
+          </div>
+          <div class="bg-slate-50 rounded-lg p-3 border border-slate-200 flex items-center justify-between">
+            <span class="font-semibold text-slate-700">सामाजिक विज्ञान (35)</span>
+            <span id="secScoreSocial" class="font-bold text-blue-900 tabular-nums">0 / 35</span>
+          </div>
+          <div class="bg-slate-50 rounded-lg p-3 border border-slate-200 flex items-center justify-between">
+            <span class="font-semibold text-slate-700">गणित (20)</span>
+            <span id="secScoreMaths" class="font-bold text-blue-900 tabular-nums">0 / 20</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review Filter Tabs -->
+      <div class="flex flex-wrap items-center justify-between gap-2 bg-white p-3 rounded-xl border border-slate-200">
+        <span class="text-xs sm:text-sm font-semibold text-slate-700">उत्तर समीक्षा (Answer Review):</span>
+        <div class="flex flex-wrap gap-1.5">
+          <button type="button" data-rfilter="all" class="rfilter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-blue-900 text-white cursor-pointer">सभी</button>
+          <button type="button" data-rfilter="correct" class="rfilter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">सही</button>
+          <button type="button" data-rfilter="wrong" class="rfilter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">गलत</button>
+          <button type="button" data-rfilter="skipped" class="rfilter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">छोड़े गए</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Single Question View + Palette -->
+    <div id="singleViewContainer" class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      <div class="lg:col-span-8 flex flex-col">
+        <div id="singleQuestionCard" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 flex-1"></div>
+
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-2">
+          <button id="prevBtn" type="button" class="px-4 py-2 rounded-xl border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 text-sm font-semibold disabled:opacity-40 cursor-pointer">
+            ← पिछला प्रश्न
+          </button>
+          <button id="clearChoiceBtn" type="button" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 cursor-pointer">
+            विकल्प हटाएँ
+          </button>
+          <button id="nextBtn" type="button" class="px-4 py-2 rounded-xl bg-blue-900 hover:bg-blue-800 text-white text-sm font-semibold disabled:opacity-40 cursor-pointer">
+            अगला प्रश्न →
+          </button>
+        </div>
+      </div>
+
+      <aside class="lg:col-span-4">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sticky top-32">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-bold text-slate-800">प्रश्न पैलेट (Palette)</h3>
+            <span id="paletteCountLabel" class="text-xs text-slate-500 tabular-nums">0/90 हल</span>
+          </div>
+          <div id="paletteGrid" class="grid grid-cols-5 sm:grid-cols-10 lg:grid-cols-5 gap-1.5 max-h-72 overflow-y-auto palette-scroll pr-1"></div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-emerald-600 inline-block"></span> हल किया</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-slate-200 inline-block"></span> बाकी</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded ring-2 ring-blue-700 bg-white inline-block"></span> वर्तमान</span>
+          </div>
+          <button id="sidebarSubmitBtn" type="button" class="mt-4 w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm py-2.5 rounded-xl shadow-sm transition cursor-pointer">
+            टेस्ट सबमिट करें (Submit)
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- List View / Result Review Container -->
+    <div id="listViewContainer" class="hidden space-y-4"></div>
+
+    <footer class="mt-8 pb-4 text-center text-xs text-slate-500">
+      © Winstudy Point • Dir:- Aditya Kumar
+    </footer>
+  </main>
+
+  <!-- In-Page Confirmation Modal -->
+  <div id="confirmModal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200">
+      <h3 class="text-lg font-bold text-slate-900">क्या आप टेस्ट सबमिट करना चाहते हैं?</h3>
+      <p id="modalSummaryText" class="text-sm text-slate-600 mt-2">आपने 90 में से 0 प्रश्नों के उत्तर दिए हैं।</p>
+      <div class="mt-5 flex items-center justify-end gap-2.5">
+        <button id="modalCancelBtn" type="button" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 text-sm font-semibold cursor-pointer">
+          वापस जाएँ
+        </button>
+        <button id="modalConfirmBtn" type="button" class="px-4 py-2 rounded-xl bg-blue-900 hover:bg-blue-800 text-white text-sm font-semibold cursor-pointer">
+          हाँ, सबमिट करें
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const QUESTIONS = [
+      // --- विज्ञान (Science: Q1 - Q35) ---
+      {
+        id: 1, section: 'science', chapter: 'फसल उत्पादन',
+        question: 'निम्नलिखित में से कौन-सी फसल ‘रबी फसल’ का उदाहरण है?',
+        options: ['धान', 'मक्का', 'गेहूँ', 'सोयाबीन'],
+        answerIndex: 2,
+        explanation: 'गेहूँ, चना और सरसों शीत ऋतु में बोई जाने वाली रबी फसलें हैं।'
+      },
+      {
+        id: 2, section: 'science', chapter: 'सूक्ष्मजीव',
+        question: 'दूध को दही में बदलने वाला जीवाणु कौन-सा है?',
+        options: ['राइजोबियम', 'लैक्टोबैसिलस', 'ईस्ट', 'पेनिसिलियम'],
+        answerIndex: 1,
+        explanation: 'लैक्टोबैसिलस नामक जीवाणु दूध में लैक्टोज को लैक्टिक अम्ल में बदलकर दही बनाता है।'
+      },
+      {
+        id: 3, section: 'science', chapter: 'सूक्ष्मजीव',
+        question: 'मलेरिया रोग का वाहक कौन-सा मच्छर है?',
+        options: ['मादा एनोफिलीज़ मच्छर', 'मादा एडीज़ मच्छर', 'नर एनोफिलीज़ मच्छर', 'क्यूलेक्स मच्छर'],
+        answerIndex: 0,
+        explanation: 'मलेरिया परजीवी (प्लाज्मोडियम) का वाहक मादा एनोफिलीज़ मच्छर होता है।'
+      },
+      {
+        id: 4, section: 'science', chapter: 'धातु एवं अधातु',
+        question: 'कौन-सी धातु कमरे के ताप पर द्रव अवस्था में पाई जाती है?',
+        options: ['सोडियम', 'पारा (मरकरी)', 'लोहा', 'ताँबा'],
+        answerIndex: 1,
+        explanation: 'पारा (Mercury) एकमात्र धातु है जो सामान्य कमरे के ताप पर द्रव अवस्था में रहती है।'
+      },
+      {
+        id: 5, section: 'science', chapter: 'धातु एवं अधातु',
+        question: 'निम्नलिखित में से किस अधातु को जल के अंदर रखा जाता है?',
+        options: ['सल्फर', 'आयोडीन', 'श्वेत फॉस्फोरस', 'कार्बन'],
+        answerIndex: 2,
+        explanation: 'श्वेत फॉस्फोरस वायु के संपर्क में आते ही आग पकड़ लेता है, इसलिए इसे जल में डुबोकर रखा जाता है।'
+      },
+      {
+        id: 6, section: 'science', chapter: 'कोयला और पेट्रोलियम',
+        question: 'प्राकृतिक गैस का मुख्य घटक क्या है?',
+        options: ['मीथेन', 'ईथेन', 'प्रोपेन', 'ब्यूटेन'],
+        answerIndex: 0,
+        explanation: 'प्राकृतिक गैस (CNG) में मुख्य रूप से मीथेन (CH₄) पाई जाती है।'
+      },
+      {
+        id: 7, section: 'science', chapter: 'दहन और ज्वाला',
+        question: 'आग बुझाने वाले अग्निशामक यंत्रों में मुख्यतः किस गैस का उपयोग होता है?',
+        options: ['ऑक्सीजन', 'नाइट्रोजन', 'कार्बन डाइऑक्साइड', 'हाइड्रोजन'],
+        answerIndex: 2,
+        explanation: 'कार्बन डाइऑक्साइड (CO₂) ऑक्सीजन की आपूर्ति रोककर आग को बुझाती है।'
+      },
+      {
+        id: 8, section: 'science', chapter: 'दहन और ज्वाला',
+        question: 'ईंधन के ऊष्मीय मान का मात्रक क्या होता है?',
+        options: ['जूल/सेकंड', 'किलोजूल/किलोग्राम (kJ/kg)', 'न्यूटन/मीटर', 'वाट'],
+        answerIndex: 1,
+        explanation: 'किसी ईंधन के 1 किलोग्राम के पूर्ण दहन से प्राप्त ऊष्मा को kJ/kg में मापा जाता है।'
+      },
+      {
+        id: 9, section: 'science', chapter: 'पौधे एवं जंतुओं का संरक्षण',
+        question: 'भारत का पहला राष्ट्रीय उद्यान कौन-सा है?',
+        options: ['काजीरंगा राष्ट्रीय उद्यान', 'जिम कॉर्बेट राष्ट्रीय उद्यान', 'वाल्मीकि राष्ट्रीय उद्यान', 'गिर राष्ट्रीय उद्यान'],
+        answerIndex: 1,
+        explanation: 'जिम कॉर्बेट राष्ट्रीय उद्यान (उत्तराखंड) भारत का पहला राष्ट्रीय उद्यान है।'
+      },
+      {
+        id: 10, section: 'science', chapter: 'कोशिका',
+        question: 'कोशिका की खोज किस वैज्ञानिक ने की थी?',
+        options: ['रॉबर्ट ब्राउन', 'रॉबर्ट हुक', 'ल्यूवेनहॉक', 'श्लाइडेन'],
+        answerIndex: 1,
+        explanation: 'रॉबर्ट हुक ने सन् 1665 में कॉर्क की स्लाइस में कोशिका की खोज की थी।'
+      },
+      {
+        id: 11, section: 'science', chapter: 'कोशिका',
+        question: 'निम्नलिखित में से किसे ‘कोशिका का ऊर्जा-घर’ (Powerhouse) कहा जाता है?',
+        options: ['राइबोसोम', 'लाइसोसोम', 'माइटोकॉन्ड्रिया', 'गॉल्जीकाय'],
+        answerIndex: 2,
+        explanation: 'माइटोकॉन्ड्रिया में ATP के रूप में ऊर्जा का निर्माण होता है, इसलिए इसे कोशिका का ऊर्जा-घर कहते हैं।'
+      },
+      {
+        id: 12, section: 'science', chapter: 'कोशिका',
+        question: 'पादप कोशिका में पाया जाने वाला कौन-सा भाग जंतु कोशिका में नहीं होता?',
+        options: ['कोशिका झिल्ली', 'केंद्रक', 'कोशिका भित्ति एवं हरितलवक', 'कोशिका द्रव्य'],
+        answerIndex: 2,
+        explanation: 'कोशिका भित्ति और हरितलवक (क्लोरोप्लास्ट) केवल पादप कोशिकाओं में पाए जाते हैं।'
+      },
+      {
+        id: 13, section: 'science', chapter: 'किशोरावस्था',
+        question: 'इंसुलिन हार्मोन की कमी से कौन-सा रोग होता है?',
+        options: ['घेंघा (गॉयटर)', 'मधुमेह (डायबिटीज)', 'रतौंधी', 'स्कर्वी'],
+        answerIndex: 1,
+        explanation: 'अग्न्याशय द्वारा स्रावित इंसुलिन की कमी से रक्त में शर्करा बढ़ जाती है, जिसे मधुमेह कहते हैं।'
+      },
+      {
+        id: 14, section: 'science', chapter: 'किशोरावस्था',
+        question: 'मनुष्य की कोशिकाओं में गुणसूत्रों (Chromosomes) के कितने जोड़े होते हैं?',
+        options: ['22 जोड़े', '23 जोड़े', '24 जोड़े', '46 जोड़े'],
+        answerIndex: 1,
+        explanation: 'मानव कोशिका में कुल 46 गुणसूत्र यानी 23 जोड़े गुणसूत्र होते हैं।'
+      },
+      {
+        id: 15, section: 'science', chapter: 'बल तथा दाब',
+        question: 'बल का SI मात्रक क्या होता है?',
+        options: ['पास्कल', 'जूल', 'न्यूटन', 'वाट'],
+        answerIndex: 2,
+        explanation: 'बल (Force) का अंतर्राष्ट्रीय (SI) मात्रक न्यूटन (N) है।'
+      },
+      {
+        id: 16, section: 'science', chapter: 'बल तथा दाब',
+        question: 'दाब (Pressure) का सूत्र क्या होता है?',
+        options: ['बल × क्षेत्रफल', 'बल / क्षेत्रफल', 'द्रव्यमान × त्वरण', 'कार्य / समय'],
+        answerIndex: 1,
+        explanation: 'प्रति एकांक क्षेत्रफल पर लगने वाले बल को दाब कहते हैं (दाब = बल / क्षेत्रफल)।'
+      },
+      {
+        id: 17, section: 'science', chapter: 'घर्षण',
+        question: 'निम्नलिखित में से किस घर्षण का मान सबसे कम होता है?',
+        options: ['स्थैतिक घर्षण', 'सर्पी घर्षण', 'लोटनिक घर्षण', 'ये सभी बराबर होते हैं'],
+        answerIndex: 2,
+        explanation: 'लोटनिक (रोलिंग) घर्षण का मान सर्पी और स्थैतिक घर्षण से हमेशा कम होता है।'
+      },
+      {
+        id: 18, section: 'science', chapter: 'ध्वनि',
+        question: 'ध्वनि की आवृत्ति का मात्रक क्या है?',
+        options: ['डेसीबल', 'हर्ट्ज़ (Hz)', 'मीटर/सेकंड', 'जूल'],
+        answerIndex: 1,
+        explanation: 'आवृत्ति को प्रति सेकंड कंपन या हर्ट्ज़ (Hz) में मापा जाता है।'
+      },
+      {
+        id: 19, section: 'science', chapter: 'ध्वनि',
+        question: 'मानव कान के लिए श्रव्य (सुनने योग्य) ध्वनि की आवृत्ति परास क्या है?',
+        options: ['20 Hz से 200 Hz', '20 Hz से 20,000 Hz', '20,000 Hz से अधिक', '0 से 20 Hz'],
+        answerIndex: 1,
+        explanation: 'मनुष्य के कान 20 Hz से 20,000 Hz (20 kHz) तक की ध्वनि सुन सकते हैं।'
+      },
+      {
+        id: 20, section: 'science', chapter: 'विद्युत धारा के रासायनिक प्रभाव',
+        question: 'लोहे की वस्तुओं को जंग से बचाने के लिए उन पर किस धातु की परत चढ़ाई जाती है?',
+        options: ['सोना', 'जिंक (जस्ता)', 'सोडियम', 'कार्बन'],
+        answerIndex: 1,
+        explanation: 'लोहे पर जिंक की परत चढ़ाने की प्रक्रिया को यशदलेपन (Galvanization) कहते हैं।'
+      },
+      {
+        id: 21, section: 'science', chapter: 'कुछ प्राकृतिक परिघटनाएँ',
+        question: 'भूकंप की तीव्रता किस पैमाने पर मापी जाती है?',
+        options: ['रिक्टर पैमाना', 'थर्मामीटर', 'बैरोमीटर', 'अमीटर'],
+        answerIndex: 0,
+        explanation: 'भूकंप की शक्ति या परिमाण को रिक्टर पैमाने (Richter Scale) पर व्यक्त किया जाता है।'
+      },
+      {
+        id: 22, section: 'science', chapter: 'प्रकाश',
+        question: 'प्रकाश के परावर्तन के नियम के अनुसार आपतन कोण और परावर्तन कोण में क्या संबंध है?',
+        options: ['आपतन कोण > परावर्तन कोण', 'आपतन कोण < परावर्तन कोण', 'आपतन कोण = परावर्तन कोण', 'दोनों का योग 90° होता है'],
+        answerIndex: 2,
+        explanation: 'परावर्तन के प्रथम नियम के अनुसार आपतन कोण (∠i) सदैव परावर्तन कोण (∠r) के बराबर होता है।'
+      },
+      {
+        id: 23, section: 'science', chapter: 'प्रकाश',
+        question: 'मानव नेत्र के किस भाग पर किसी वस्तु का प्रतिबिंब बनता है?',
+        options: ['कॉर्निया', 'पुतली', 'रेटिना (दृष्टिपटल)', 'परितारिका'],
+        answerIndex: 2,
+        explanation: 'आँख का लेंस वस्तु का वास्तविक और उल्टा प्रतिबिंब रेटिना (दृष्टिपटल) पर बनाता है।'
+      },
+      {
+        id: 24, section: 'science', chapter: 'अम्ल, क्षारक और लवण',
+        question: 'नीला लिटमस पत्र अम्ल के संपर्क में आने पर किस रंग का हो जाता है?',
+        options: ['हरा', 'लाल', 'पीला', 'काला'],
+        answerIndex: 1,
+        explanation: 'अम्ल नीले लिटमस पत्र को लाल कर देते हैं, जबकि क्षारक लाल लिटमस को नीला करते हैं।'
+      },
+      {
+        id: 25, section: 'science', chapter: 'अम्ल, क्षारक और लवण',
+        question: 'शुद्ध जल का pH मान कितना होता है?',
+        options: ['0', '5', '7', '14'],
+        answerIndex: 2,
+        explanation: 'शुद्ध जल उदासीन होता है, इसलिए इसका pH मान 7 होता है।'
+      },
+      {
+        id: 26, section: 'science', chapter: 'जीवों में श्वसन',
+        question: 'मछलियाँ श्वसन के लिए किस अंग का उपयोग करती हैं?',
+        options: ['फेफड़े', 'गलफड़े (गिल्स)', 'त्वचा', 'श्वासनली'],
+        answerIndex: 1,
+        explanation: 'मछलियाँ जल में घुली ऑक्सीजन को गलफड़ों (Gills) की सहायता से ग्रहण करती हैं।'
+      },
+      {
+        id: 27, section: 'science', chapter: 'पादपों में पोषण',
+        question: 'पौधों में प्रकाश संश्लेषण के लिए निम्नलिखित में से क्या आवश्यक नहीं है?',
+        options: ['क्लोरोफिल', 'सूर्य का प्रकाश', 'कार्बन डाइऑक्साइड', 'ऑक्सीजन'],
+        answerIndex: 3,
+        explanation: 'प्रकाश संश्लेषण में CO₂ और जल का उपयोग होता है तथा ऑक्सीजन उत्पाद के रूप में बाहर निकलती है।'
+      },
+      {
+        id: 28, section: 'science', chapter: 'परिसंचरण तंत्र',
+        question: 'मानव रक्त का लाल रंग किस वर्णक के कारण होता है?',
+        options: ['क्लोरोफिल', 'हीमोग्लोबिन', 'मेलेनिन', 'बिलिरुबिन'],
+        answerIndex: 1,
+        explanation: 'लाल रक्त कोशिकाओं में उपस्थित हीमोग्लोबिन के कारण रक्त का रंग लाल होता है।'
+      },
+      {
+        id: 29, section: 'science', chapter: 'विटामिन एवं पोषण',
+        question: 'विटामिन C की कमी से कौन-सा रोग होता है?',
+        options: ['बेरी-बेरी', 'रिकेट्स', 'स्कर्वी', 'घेंघा'],
+        answerIndex: 2,
+        explanation: 'विटामिन C की कमी से मसूड़ों से खून आने वाला रोग ‘स्कर्वी’ होता है।'
+      },
+      {
+        id: 30, section: 'science', chapter: 'ऊष्मा',
+        question: 'स्वस्थ मनुष्य के शरीर का सामान्य तापमान सेल्सियस पैमाने पर कितना होता है?',
+        options: ['35°C', '37°C', '98.6°C', '40°C'],
+        answerIndex: 1,
+        explanation: 'स्वस्थ मानव शरीर का सामान्य तापमान लगभग 37°C (या 98.6°F) होता है।'
+      },
+      {
+        id: 31, section: 'science', chapter: 'ऊष्मा',
+        question: 'सूर्य की ऊष्मा पृथ्वी तक किस विधि द्वारा पहुँचती है?',
+        options: ['चालन', 'संवहन', 'विकिरण', 'संघनन'],
+        answerIndex: 2,
+        explanation: 'विकिरण (Radiation) के लिए किसी माध्यम की आवश्यकता नहीं होती, इसी से सूर्य की ऊष्मा पृथ्वी तक आती है।'
+      },
+      {
+        id: 32, section: 'science', chapter: 'विद्युत',
+        question: 'विद्युत बल्ब का तंतु (फिलामेंट) किस धातु का बना होता है?',
+        options: ['ताँबा', 'टंगस्टन', 'एल्युमीनियम', 'चाँदी'],
+        answerIndex: 1,
+        explanation: 'टंगस्टन का गलनांक बहुत अधिक होता है, इसलिए इसका उपयोग बल्ब के फिलामेंट में होता है।'
+      },
+      {
+        id: 33, section: 'science', chapter: 'तारे एवं सौर परिवार',
+        question: 'सौरमंडल का सबसे बड़ा ग्रह कौन-सा है?',
+        options: ['शनि', 'पृथ्वी', 'बृहस्पति', 'मंगल'],
+        answerIndex: 2,
+        explanation: 'बृहस्पति (Jupiter) हमारे सौरमंडल का सबसे बड़ा ग्रह है।'
+      },
+      {
+        id: 34, section: 'science', chapter: 'वायु तथा जल प्रदूषण',
+        question: 'वायुमंडल में नाइट्रोजन गैस की मात्रा लगभग कितने प्रतिशत है?',
+        options: ['21%', '78%', '0.03%', '50%'],
+        answerIndex: 1,
+        explanation: 'पृथ्वी के वायुमंडल में लगभग 78% नाइट्रोजन और 21% ऑक्सीजन है।'
+      },
+      {
+        id: 35, section: 'science', chapter: 'तारे एवं सौर परिवार',
+        question: 'किस ग्रह को ‘भोर का तारा’ या ‘सांझ का तारा’ कहा जाता है?',
+        options: ['बुध', 'शुक्र', 'मंगल', 'वरुण'],
+        answerIndex: 1,
+        explanation: 'शुक्र (Venus) सबसे चमकीला ग्रह है और सूर्योदय से पहले तथा सूर्यास्त के बाद दिखने के कारण इसे भोर/सांझ का तारा कहते हैं।'
+      },
+
+      // --- सामाजिक विज्ञान (Social Science: Q36 - Q70) ---
+      {
+        id: 36, section: 'social', chapter: 'आधुनिक भारत का इतिहास',
+        question: 'भारत में प्रथम स्वतंत्रता संग्राम (सैनिक विद्रोह) कब शुरू हुआ था?',
+        options: ['10 मई 1857', '15 अगस्त 1947', '26 जनवरी 1950', '18 मार्च 1858'],
+        answerIndex: 0,
+        explanation: '1857 की क्रांति की शुरुआत 10 मई 1857 को मेरठ छावनी से हुई थी।'
+      },
+      {
+        id: 37, section: 'social', chapter: '1857 का विद्रोह',
+        question: 'बिहार में 1857 की क्रांति का नेतृत्व किसने किया था?',
+        options: ['तात्या टोपे', 'बाबू वीर कुँवर सिंह', 'नाना साहब', 'मंगल पांडे'],
+        answerIndex: 1,
+        explanation: 'जगदीशपुर (बिहार) के बाबू वीर कुँवर सिंह ने 1857 के विद्रोह का नेतृत्व किया था।'
+      },
+      {
+        id: 38, section: 'social', chapter: 'व्यापार से साम्राज्य तक',
+        question: 'प्लासी का युद्ध किस वर्ष लड़ा गया था?',
+        options: ['1757', '1764', '1857', '1761'],
+        answerIndex: 0,
+        explanation: 'प्लासी का प्रसिद्ध युद्ध 23 जून 1757 को अंग्रेजों और सिराजुद्दौला के बीच हुआ था।'
+      },
+      {
+        id: 39, section: 'social', chapter: 'व्यापार से साम्राज्य तक',
+        question: 'वास्को-डी-गामा सन् 1498 में भारत के किस बंदरगाह पर पहुँचा था?',
+        options: ['मुंबई', 'कालीकट', 'कोलकाता', 'चेन्नई'],
+        answerIndex: 1,
+        explanation: 'पुर्तगाली नाविक वास्को-डी-गामा 1498 में केरल के कालीकट बंदरगाह पर पहुँचा था।'
+      },
+      {
+        id: 40, section: 'social', chapter: 'सामाजिक सुधार',
+        question: '‘ब्रह्म समाज’ की स्थापना किसने की थी?',
+        options: ['स्वामी दयानंद सरस्वती', 'राजा राममोहन राय', 'स्वामी विवेकानंद', 'ज्योतिबा फुले'],
+        answerIndex: 1,
+        explanation: 'राजा राममोहन राय ने 1828 ई. में ब्रह्म समाज की स्थापना की थी।'
+      },
+      {
+        id: 41, section: 'social', chapter: 'सामाजिक सुधार',
+        question: '‘आर्य समाज’ के संस्थापक कौन थे?',
+        options: ['स्वामी दयानंद सरस्वती', 'ईश्वरचंद्र विद्यासागर', 'राजा राममोहन राय', 'महात्मा गाँधी'],
+        answerIndex: 0,
+        explanation: 'स्वामी दयानंद सरस्वती ने 1875 में आर्य समाज की स्थापना की और ‘वेदों की ओर लौटो’ का नारा दिया।'
+      },
+      {
+        id: 42, section: 'social', chapter: 'राष्ट्रीय आंदोलन',
+        question: 'चंपारण सत्याग्रह (1917) किस राज्य से संबंधित था?',
+        options: ['उत्तर प्रदेश', 'बिहार', 'गुजरात', 'बंगाल'],
+        answerIndex: 1,
+        explanation: 'महात्मा गाँधी का पहला सत्याग्रह 1917 में बिहार के चंपारण में नील किसानों के लिए हुआ था।'
+      },
+      {
+        id: 43, section: 'social', chapter: 'राष्ट्रीय आंदोलन',
+        question: 'जलियांवाला बाग हत्याकांड कब हुआ था?',
+        options: ['13 अप्रैल 1919', '13 अप्रैल 1920', '5 फरवरी 1922', '8 अगस्त 1942'],
+        answerIndex: 0,
+        explanation: 'जलियांवाला बाग हत्याकांड 13 अप्रैल 1919 को अमृतसर में हुआ था।'
+      },
+      {
+        id: 44, section: 'social', chapter: 'राष्ट्रीय आंदोलन',
+        question: '‘करो या मरो’ का नारा महात्मा गाँधी ने किस आंदोलन में दिया था?',
+        options: ['असहयोग आंदोलन', 'सविनय अवज्ञा आंदोलन', 'भारत छोड़ो आंदोलन (1942)', 'चंपारण सत्याग्रह'],
+        answerIndex: 2,
+        explanation: '1942 के भारत छोड़ो आंदोलन के दौरान गाँधी जी ने ‘करो या मरो’ का नारा दिया था।'
+      },
+      {
+        id: 45, section: 'social', chapter: 'राष्ट्रीय आंदोलन',
+        question: '‘आज़ाद हिंद फ़ौज’ का गठन किसने किया था?',
+        options: ['भगत सिंह', 'सुभाष चंद्र बोस', 'चंद्रशेखर आज़ाद', 'जवाहरलाल नेहरू'],
+        answerIndex: 1,
+        explanation: 'नेताजी सुभाष चंद्र बोस ने आज़ाद हिंद फ़ौज का नेतृत्व और पुनर्गठन किया था।'
+      },
+      {
+        id: 46, section: 'social', chapter: 'मध्यकालीन इतिहास',
+        question: 'पानीपत का प्रथम युद्ध (1526) बाबर और किसके बीच हुआ था?',
+        options: ['राणा सांगा', 'इब्राहिम लोदी', 'हेमू', 'शेरशाह सूरी'],
+        answerIndex: 1,
+        explanation: '1526 ई. में पानीपत के प्रथम युद्ध में बाबर ने इब्राहिम लोदी को हराकर मुगल वंश की नींव रखी।'
+      },
+      {
+        id: 47, section: 'social', chapter: 'प्राचीन इतिहास',
+        question: 'गौतम बुद्ध को ज्ञान की प्राप्ति किस स्थान पर हुई थी?',
+        options: ['सारनाथ', 'लुंबिनी', 'बोधगया', 'कुशीनगर'],
+        answerIndex: 2,
+        explanation: 'गौतम बुद्ध को बिहार के बोधगया में बोधि वृक्ष के नीचे ज्ञान की प्राप्ति हुई थी।'
+      },
+      {
+        id: 48, section: 'social', chapter: 'प्राचीन इतिहास',
+        question: '‘अर्थशास्त्र’ नामक प्रसिद्ध पुस्तक के लेखक कौन थे?',
+        options: ['मेगस्थनीज', 'कौटिल्य (चाणक्य)', 'कालिदास', 'बाणभट्ट'],
+        answerIndex: 1,
+        explanation: 'मौर्य साम्राज्य के महामंत्री कौटिल्य (चाणक्य) ने ‘अर्थशास्त्र’ की रचना की थी।'
+      },
+      {
+        id: 49, section: 'social', chapter: 'संसाधन एवं भूगोल',
+        question: 'निम्नलिखित में से कौन-सा एक ‘नवीकरणीय संसाधन’ है?',
+        options: ['कोयला', 'पेट्रोलियम', 'सौर ऊर्जा', 'प्राकृतिक गैस'],
+        answerIndex: 2,
+        explanation: 'सौर ऊर्जा, पवन ऊर्जा और जल नवीकरणीय संसाधन हैं क्योंकि इनकी पुनः पूर्ति जल्दी हो जाती है।'
+      },
+      {
+        id: 50, section: 'social', chapter: 'मृदा एवं कृषि',
+        question: 'कपास की खेती के लिए कौन-सी मिट्टी सबसे उपयुक्त मानी जाती है?',
+        options: ['जलोढ़ मिट्टी', 'काली मिट्टी (रेगुर)', 'लाल मिट्टी', 'मरुस्थलीय मिट्टी'],
+        answerIndex: 1,
+        explanation: 'काली मिट्टी को रेगुर मिट्टी या काली कपासी मिट्टी भी कहते हैं।'
+      },
+      {
+        id: 51, section: 'social', chapter: 'भारतीय भूगोल',
+        question: 'भारत के किस राज्य में कर्क रेखा (Tropic of Cancer) नहीं गुजरती?',
+        options: ['झारखंड', 'मध्य प्रदेश', 'बिहार', 'गुजरात'],
+        answerIndex: 2,
+        explanation: 'कर्क रेखा भारत के 8 राज्यों से गुजरती है, जिनमें बिहार शामिल नहीं है।'
+      },
+      {
+        id: 52, section: 'social', chapter: 'खनिज और ऊर्जा',
+        question: 'बिहार और झारखंड में ‘जादूगोड़ा’ किस खनिज के लिए प्रसिद्ध है?',
+        options: ['लोहा', 'यूरेनियम', 'अभ्रक', 'बॉक्साइट'],
+        answerIndex: 1,
+        explanation: 'जादूगोड़ा (झारखंड) भारत की प्रसिद्ध यूरेनियम खदान के लिए जाना जाता है।'
+      },
+      {
+        id: 53, section: 'social', chapter: 'कृषि',
+        question: 'निम्नलिखित में से किसे ‘सुनहरा रेशा’ (Golden Fibre) कहा जाता है?',
+        options: ['कपास', 'जूट (पटसन)', 'रेशम', 'नायलॉन'],
+        answerIndex: 1,
+        explanation: 'जूट (पटसन) को उसके रंग और आर्थिक महत्व के कारण सुनहरा रेशा कहा जाता है।'
+      },
+      {
+        id: 54, section: 'social', chapter: 'उद्योग',
+        question: 'भारत का ‘सिलिकॉन वैली’ (IT हब) किस शहर को कहा जाता है?',
+        options: ['हैदराबाद', 'बेंगलुरु', 'पुणे', 'चेन्नई'],
+        answerIndex: 1,
+        explanation: 'सूचना प्रौद्योगिकी उद्योग के कारण बेंगलुरु को भारत की सिलिकॉन वैली कहा जाता है।'
+      },
+      {
+        id: 55, section: 'social', chapter: 'पृथ्वी और वायुमंडल',
+        question: 'वायुमंडल की किस परत में ओज़ोन परत पाई जाती है?',
+        options: ['क्षोभमंडल', 'समतापमंडल', 'मध्यमंडल', 'बाह्यमंडल'],
+        answerIndex: 1,
+        explanation: 'समतापमंडल (Stratosphere) में ओज़ोन गैस की परत होती है जो पराबैंगनी किरणों से बचाती है।'
+      },
+      {
+        id: 56, section: 'social', chapter: 'जल संसाधन',
+        question: 'विश्व की सबसे लंबी नदी कौन-सी है?',
+        options: ['अमेज़न नदी', 'नील नदी', 'गंगा नदी', 'यांग्त्ज़ी नदी'],
+        answerIndex: 1,
+        explanation: 'अफ्रीका की नील नदी विश्व की सबसे लंबी नदी है।'
+      },
+      {
+        id: 57, section: 'social', chapter: 'भारतीय भूगोल',
+        question: 'हीराकुंड बाँध किस नदी पर बनाया गया है?',
+        options: ['सतलुज', 'महानदी', 'कृष्णा', 'नर्मदा'],
+        answerIndex: 1,
+        explanation: 'हीराकुंड बाँध ओडिशा में महानदी पर स्थित है।'
+      },
+      {
+        id: 58, section: 'social', chapter: 'बिहार का भूगोल',
+        question: 'किस नदी को ‘बिहार का शोक’ कहा जाता है?',
+        options: ['गंगा', 'गंडक', 'कोसी', 'सोन'],
+        answerIndex: 2,
+        explanation: 'बार-बार मार्ग बदलने और भीषण बाढ़ लाने के कारण कोसी नदी को बिहार का शोक कहा जाता है।'
+      },
+      {
+        id: 59, section: 'social', chapter: 'भारतीय संविधान',
+        question: 'भारतीय संविधान को बनने में कुल कितना समय लगा था?',
+        options: ['2 वर्ष 11 माह 18 दिन', '3 वर्ष 5 माह 10 दिन', '1 वर्ष 11 माह 18 दिन', '2 वर्ष 6 माह 12 दिन'],
+        answerIndex: 0,
+        explanation: 'भारतीय संविधान के निर्माण में 2 वर्ष, 11 माह और 18 दिन का समय लगा था।'
+      },
+      {
+        id: 60, section: 'social', chapter: 'भारतीय संविधान',
+        question: 'भारतीय संविधान की प्रारूप समिति (Drafting Committee) के अध्यक्ष कौन थे?',
+        options: ['डॉ. राजेंद्र प्रसाद', 'डॉ. भीमराव अंबेडकर', 'पंडित नेहरू', 'सरदार पटेल'],
+        answerIndex: 1,
+        explanation: 'प्रारूप समिति के अध्यक्ष डॉ. भीमराव अंबेडकर थे, जबकि संविधान सभा के स्थायी अध्यक्ष डॉ. राजेंद्र प्रसाद थे।'
+      },
+      {
+        id: 61, section: 'social', chapter: 'मौलिक अधिकार',
+        question: 'भारतीय संविधान में वर्तमान में नागरिकों को कितने मौलिक अधिकार प्राप्त हैं?',
+        options: ['5', '6', '7', '8'],
+        answerIndex: 1,
+        explanation: 'वर्तमान में भारतीय संविधान में 6 मौलिक अधिकार हैं (संपत्ति के अधिकार को हटा दिया गया है)।'
+      },
+      {
+        id: 62, section: 'social', chapter: 'संसद',
+        question: 'भारत में मतदान करने की न्यूनतम आयु क्या है?',
+        options: ['16 वर्ष', '18 वर्ष', '21 वर्ष', '25 वर्ष'],
+        answerIndex: 1,
+        explanation: '61वें संविधान संशोधन के बाद भारत में मतदान की न्यूनतम आयु 18 वर्ष है।'
+      },
+      {
+        id: 63, section: 'social', chapter: 'संसद',
+        question: 'लोकसभा का सदस्य बनने के लिए न्यूनतम आयु कितनी होनी चाहिए?',
+        options: ['18 वर्ष', '21 वर्ष', '25 वर्ष', '30 वर्ष'],
+        answerIndex: 2,
+        explanation: 'लोकसभा चुनाव लड़ने के लिए न्यूनतम आयु 25 वर्ष और राज्यसभा के लिए 30 वर्ष है।'
+      },
+      {
+        id: 64, section: 'social', chapter: 'न्यायपालिका',
+        question: 'भारत का सर्वोच्च न्यायालय (Supreme Court) कहाँ स्थित है?',
+        options: ['मुंबई', 'कोलकाता', 'नई दिल्ली', 'प्रयागराज'],
+        answerIndex: 2,
+        explanation: 'भारत का सर्वोच्च न्यायालय नई दिल्ली में स्थित है।'
+      },
+      {
+        id: 65, section: 'social', chapter: 'स्थानीय स्वशासन',
+        question: 'भारत में पंचायती राज व्यवस्था कितने स्तरों की होती है?',
+        options: ['एक स्तरीय', 'दो स्तरीय', 'त्रि-स्तरीय', 'चार स्तरीय'],
+        answerIndex: 2,
+        explanation: 'भारत में बलवंत राय मेहता समिति के अनुसार त्रि-स्तरीय (ग्राम, प्रखंड, जिला) पंचायती राज व्यवस्था है।'
+      },
+      {
+        id: 66, section: 'social', chapter: 'जनसंख्या',
+        question: 'भारत में जनगणना कितने वर्षों के अंतराल पर की जाती है?',
+        options: ['5 वर्ष', '10 वर्ष', '15 वर्ष', '20 वर्ष'],
+        answerIndex: 1,
+        explanation: 'भारत में नियमित रूप से हर 10 वर्ष बाद जनगणना होती है।'
+      },
+      {
+        id: 67, section: 'social', chapter: 'मौलिक अधिकार',
+        question: 'संविधान के किस अनुच्छेद के अंतर्गत ‘अस्पृश्यता (छुआछूत) का अंत’ किया गया है?',
+        options: ['अनुच्छेद 14', 'अनुच्छेद 17', 'अनुच्छेद 21', 'अनुच्छेद 32'],
+        answerIndex: 1,
+        explanation: 'अनुच्छेद 17 के तहत किसी भी रूप में अस्पृश्यता को समाप्त और दंडनीय घोषित किया गया है।'
+      },
+      {
+        id: 68, section: 'social', chapter: 'मानचित्र एवं भूगोल',
+        question: 'विश्व का सबसे बड़ा महाद्वीप कौन-सा है?',
+        options: ['अफ्रीका', 'एशिया', 'यूरोप', 'उत्तरी अमेरिका'],
+        answerIndex: 1,
+        explanation: 'क्षेत्रफल और जनसंख्या दोनों की दृष्टि से एशिया विश्व का सबसे बड़ा महाद्वीप है।'
+      },
+      {
+        id: 69, section: 'social', chapter: 'संसद',
+        question: 'भारतीय संसद के तीन प्रमुख अंग कौन-कौन से हैं?',
+        options: ['राष्ट्रपति, लोकसभा और राज्यसभा', 'प्रधानमंत्री, मुख्यमंत्री और राज्यपाल', 'सुप्रीम कोर्ट, हाई कोर्ट और संसद', 'विधानसभा, विधानपरिषद और राज्यपाल'],
+        answerIndex: 0,
+        explanation: 'भारतीय संसद राष्ट्रपति, लोकसभा (निम्न सदन) और राज्यसभा (उच्च सदन) से मिलकर बनती है।'
+      },
+      {
+        id: 70, section: 'social', chapter: 'शिक्षा का अधिकार',
+        question: 'किस आयु वर्ग के बच्चों को निःशुल्क और अनिवार्य शिक्षा का मौलिक अधिकार प्राप्त है?',
+        options: ['3 से 10 वर्ष', '6 से 14 वर्ष', '5 से 12 वर्ष', '10 से 18 वर्ष'],
+        answerIndex: 1,
+        explanation: 'अनुच्छेद 21A के तहत 6 से 14 वर्ष के सभी बच्चों को निःशुल्क एवं अनिवार्य शिक्षा का अधिकार है।'
+      },
+
+      // --- गणित (Mathematics: Q71 - Q90) ---
+      {
+        id: 71, section: 'maths', chapter: 'परिमेय संख्याएँ',
+        question: '-7/9 का योज्य प्रतिलोम (Additive Inverse) क्या होगा?',
+        options: ['9/7', '-9/7', '7/9', '0'],
+        answerIndex: 2,
+        explanation: 'किसी संख्या का योज्य प्रतिलोम उसका विपरीत चिह्न होता है, अतः -7/9 + 7/9 = 0 होगा।'
+      },
+      {
+        id: 72, section: 'maths', chapter: 'एक चर वाले रैखिक समीकरण',
+        question: 'यदि 3x - 5 = 16 हो, तो x का मान क्या होगा?',
+        options: ['5', '6', '7', '8'],
+        answerIndex: 2,
+        explanation: '3x = 16 + 5 = 21 ⇒ x = 21 / 3 = 7.'
+      },
+      {
+        id: 73, section: 'maths', chapter: 'चतुर्भुज और बहुभुज',
+        question: 'एक पंचभुज (Pentagon) के सभी अंतःकोणों का योगफल कितना होता है?',
+        options: ['360°', '540°', '720°', '180°'],
+        answerIndex: 1,
+        explanation: 'सूत्र (n - 2) × 180° से, (5 - 2) × 180° = 3 × 180° = 540°.'
+      },
+      {
+        id: 74, section: 'maths', chapter: 'वर्ग और वर्गमूल',
+        question: '√1024 का मान निम्नलिखित में से क्या होगा?',
+        options: ['28', '32', '34', '36'],
+        answerIndex: 1,
+        explanation: '32 × 32 = 1024, इसलिए √1024 = 32.'
+      },
+      {
+        id: 75, section: 'maths', chapter: 'घन और घनमूल',
+        question: '∛1728 का मान कितना होता है?',
+        options: ['11', '12', '13', '14'],
+        answerIndex: 1,
+        explanation: '12 × 12 × 12 = 1728, इसलिए 1728 का घनमूल 12 है।'
+      },
+      {
+        id: 76, section: 'maths', chapter: 'प्रतिशत',
+        question: 'यदि किसी संख्या का 25%, 50 के बराबर है, तो वह संख्या क्या है?',
+        options: ['150', '200', '250', '100'],
+        answerIndex: 1,
+        explanation: '(x × 25) / 100 = 50 ⇒ x = 50 × 4 = 200.'
+      },
+      {
+        id: 77, section: 'maths', chapter: 'लाभ और हानि',
+        question: 'एक साइकिल 1200 रुपये में खरीदकर 1500 रुपये में बेची गई। लाभ प्रतिशत कितना है?',
+        options: ['20%', '25%', '30%', '15%'],
+        answerIndex: 1,
+        explanation: 'लाभ = 1500 - 1200 = 300 रु.; लाभ% = (300 / 1200) × 100 = 25%.'
+      },
+      {
+        id: 78, section: 'maths', chapter: 'ब्याज',
+        question: '2000 रुपये पर 10% वार्षिक दर से 2 वर्ष का साधारण ब्याज कितना होगा?',
+        options: ['200 रु.', '400 रु.', '420 रु.', '300 रु.'],
+        answerIndex: 1,
+        explanation: 'साधारण ब्याज = (P × R × T) / 100 = (2000 × 10 × 2) / 100 = 400 रु.'
+      },
+      {
+        id: 79, section: 'maths', chapter: 'घातांक और घात',
+        question: '(2⁰ + 3⁰) × 5⁰ का मान क्या होगा?',
+        options: ['0', '1', '2', '10'],
+        answerIndex: 2,
+        explanation: 'किसी भी अशून्य संख्या की घात 0 होने पर मान 1 होता है, अतः (1 + 1) × 1 = 2.'
+      },
+      {
+        id: 80, section: 'maths', chapter: 'बीजीय व्यंजक',
+        question: 'यदि a + b = 7 और ab = 10 हो, तो a² + b² का मान क्या होगा?',
+        options: ['29', '49', '39', '19'],
+        answerIndex: 0,
+        explanation: 'a² + b² = (a + b)² - 2ab = 7² - 2(10) = 49 - 20 = 29.'
+      },
+      {
+        id: 81, section: 'maths', chapter: 'क्षेत्रमिति',
+        question: 'एक समचतुर्भुज के विकर्ण 10 सेमी और 12 सेमी हैं। इसका क्षेत्रफल क्या होगा?',
+        options: ['120 वर्ग सेमी', '60 वर्ग सेमी', '30 वर्ग सेमी', '44 वर्ग सेमी'],
+        answerIndex: 1,
+        explanation: 'समचतुर्भुज का क्षेत्रफल = (1/2) × d₁ × d₂ = (1/2) × 10 × 12 = 60 वर्ग सेमी।'
+      },
+      {
+        id: 82, section: 'maths', chapter: 'क्षेत्रमिति',
+        question: 'एक घन का कुल पृष्ठीय क्षेत्रफल 150 वर्ग सेमी है। इसकी भुजा (कोर) की लंबाई क्या होगी?',
+        options: ['4 सेमी', '5 सेमी', '6 सेमी', '25 सेमी'],
+        answerIndex: 1,
+        explanation: '6a² = 150 ⇒ a² = 25 ⇒ a = 5 सेमी।'
+      },
+      {
+        id: 83, section: 'maths', chapter: 'अनुपात और समानुपात',
+        question: 'यदि 12 मजदूर एक काम को 10 दिन में पूरा करते हैं, तो 15 मजदूर उसी काम को कितने दिन में करेंगे?',
+        options: ['6 दिन', '8 दिन', '9 दिन', '12 दिन'],
+        answerIndex: 1,
+        explanation: 'प्रतिलोम विचरण से: 12 × 10 = 15 × x ⇒ x = 120 / 15 = 8 दिन।'
+      },
+      {
+        id: 84, section: 'maths', chapter: 'गुणनखंडन',
+        question: 'x² - 49 का सही गुणनखंड क्या होगा?',
+        options: ['(x - 7)²', '(x + 7)²', '(x + 7)(x - 7)', '(x + 49)(x - 1)'],
+        answerIndex: 2,
+        explanation: 'सर्वसमिका a² - b² = (a + b)(a - b) से x² - 7² = (x + 7)(x - 7).'
+      },
+      {
+        id: 85, section: 'maths', chapter: 'आँकड़ों का प्रबंधन',
+        question: 'एक पासे को एक बार फेंकने पर एक सम संख्या (Even Number) आने की प्रायिकता क्या है?',
+        options: ['1/6', '1/3', '1/2', '2/3'],
+        answerIndex: 2,
+        explanation: 'कुल परिणाम = 6 (1,2,3,4,5,6); सम संख्याएँ = 3 (2,4,6); प्रायिकता = 3/6 = 1/2.'
+      },
+      {
+        id: 86, section: 'maths', chapter: 'संख्या पद्धति',
+        question: 'प्रथम पाँच अभाज्य (Prime) संख्याओं का औसत (माध्य) क्या होगा?',
+        options: ['5.0', '5.6', '6.2', '4.8'],
+        answerIndex: 1,
+        explanation: 'प्रथम पाँच अभाज्य संख्याएँ: 2, 3, 5, 7, 11 हैं। योग = 28, औसत = 28 / 5 = 5.6.'
+      },
+      {
+        id: 87, section: 'maths', chapter: 'ज्यामिति',
+        question: 'किसी समबहुभुज का प्रत्येक बाह्य कोण 45° है। इस बहुभुज में भुजाओं की संख्या कितनी होगी?',
+        options: ['6', '8', '9', '10'],
+        answerIndex: 1,
+        explanation: 'भुजाओं की संख्या = 360° / बाह्य कोण = 360° / 45° = 8.'
+      },
+      {
+        id: 88, section: 'maths', chapter: 'क्षेत्रमिति',
+        question: '7 सेमी त्रिज्या वाले एक वृत्त की परिधि क्या होगी? (π = 22/7 लें)',
+        options: ['22 सेमी', '44 सेमी', '154 सेमी', '88 सेमी'],
+        answerIndex: 1,
+        explanation: 'परिधि = 2πr = 2 × (22/7) × 7 = 44 सेमी।'
+      },
+      {
+        id: 89, section: 'maths', chapter: 'चक्रवृद्धि ब्याज',
+        question: '1000 रुपये पर 10% वार्षिक दर से 2 वर्ष का चक्रवृद्धि मिश्रधन (Amount) क्या होगा?',
+        options: ['1200 रु.', '1210 रु.', '1100 रु.', '1250 रु.'],
+        answerIndex: 1,
+        explanation: 'A = P(1 + R/100)ⁿ = 1000 × (11/10) × (11/10) = 1210 रु.'
+      },
+      {
+        id: 90, section: 'maths', chapter: 'ज्यामिति',
+        question: 'एक समकोण त्रिभुज का आधार 6 सेमी और लंब 8 सेमी है, तो इसका कर्ण (Hypotenuse) कितना होगा?',
+        options: ['10 सेमी', '12 सेमी', '14 सेमी', '48 सेमी'],
+        answerIndex: 0,
+        explanation: 'पाइथागोरस प्रमेय से: कर्ण = √(6² + 8²) = √(36 + 64) = √100 = 10 सेमी।'
+      }
+    ];
+
+    const SECTION_LABELS = {
+      science: 'विज्ञान',
+      social: 'सामाजिक विज्ञान',
+      maths: 'गणित'
+    };
+
+    const OPTION_LABELS = ['A', 'B', 'C', 'D'];
+
+    let state = {
+      studentName: '',
+      started: false,
+      answers: {},
+      activeSection: 'all',
+      viewMode: 'single',
+      currentFilteredIndex: 0,
+      mode: 'test',
+      reviewFilter: 'all',
+      secondsRemaining: 90 * 60,
+      timerPaused: false,
+      elapsedSecondsOnSubmit: 0
+    };
+
+    let timerInterval = null;
+
+    const startScreen = document.getElementById('startScreen');
+    const studentNameInput = document.getElementById('studentNameInput');
+    const nameError = document.getElementById('nameError');
+    const startTestBtn = document.getElementById('startTestBtn');
+    const testHeader = document.getElementById('testHeader');
+    const mainContent = document.getElementById('mainContent');
+    const headerStudentMeta = document.getElementById('headerStudentMeta');
+    const scoreStudentNameBadge = document.getElementById('scoreStudentNameBadge');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const timerToggleBtn = document.getElementById('timerToggleBtn');
+    const topActionBtn = document.getElementById('topActionBtn');
+    const progressText = document.getElementById('progressText');
+    const viewToggleGroup = document.getElementById('viewToggleGroup');
+    const modeSingleBtn = document.getElementById('modeSingleBtn');
+    const modeListBtn = document.getElementById('modeListBtn');
+    const resultSection = document.getElementById('resultSection');
+    const singleViewContainer = document.getElementById('singleViewContainer');
+    const listViewContainer = document.getElementById('listViewContainer');
+    const singleQuestionCard = document.getElementById('singleQuestionCard');
+    const paletteGrid = document.getElementById('paletteGrid');
+    const paletteCountLabel = document.getElementById('paletteCountLabel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const clearChoiceBtn = document.getElementById('clearChoiceBtn');
+    const sidebarSubmitBtn = document.getElementById('sidebarSubmitBtn');
+    const retakeBtn = document.getElementById('retakeBtn');
+    const confirmModal = document.getElementById('confirmModal');
+    const modalSummaryText = document.getElementById('modalSummaryText');
+    const modalCancelBtn = document.getElementById('modalCancelBtn');
+    const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+
+    function getFilteredQuestions() {
+      let list = QUESTIONS;
+      if (state.activeSection !== 'all') {
+        list = list.filter(q => q.section === state.activeSection);
+      }
+      if (state.mode === 'result' && state.reviewFilter !== 'all') {
+        list = list.filter(q => {
+          const userAns = state.answers[q.id];
+          if (state.reviewFilter === 'correct') return userAns === q.answerIndex;
+          if (state.reviewFilter === 'wrong') return userAns !== undefined && userAns !== q.answerIndex;
+          if (state.reviewFilter === 'skipped') return userAns === undefined;
+          return true;
+        });
+      }
+      return list;
+    }
+
+    function formatTime(totalSec) {
+      const m = Math.floor(totalSec / 60);
+      const s = totalSec % 60;
+      return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    }
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (state.mode !== 'test' || state.timerPaused) return;
+        if (state.secondsRemaining > 0) {
+          state.secondsRemaining--;
+          timerDisplay.textContent = formatTime(state.secondsRemaining);
+          if (state.secondsRemaining <= 300) {
+            timerDisplay.classList.add('text-rose-600');
+          }
+        } else {
+          submitTest();
+        }
+      }, 1000);
+    }
+
+    function selectAnswer(qId, optIdx) {
+      if (state.mode !== 'test') return;
+      state.answers[qId] = optIdx;
+      render();
+    }
+
+    function updateProgress() {
+      const solvedCount = Object.keys(state.answers).length;
+      progressText.textContent = `हल किए: ${solvedCount} / ${QUESTIONS.length}`;
+      paletteCountLabel.textContent = `${solvedCount}/${QUESTIONS.length} हल`;
+    }
+
+    function renderSingleView(filtered) {
+      if (filtered.length === 0) {
+        singleQuestionCard.innerHTML = `<p class="text-sm text-slate-500 py-8 text-center">इस खंड में कोई प्रश्न नहीं है।</p>`;
+        return;
+      }
+      if (state.currentFilteredIndex >= filtered.length) {
+        state.currentFilteredIndex = 0;
+      }
+      const q = filtered[state.currentFilteredIndex];
+      const selected = state.answers[q.id];
+
+      const optionsHtml = q.options.map((opt, idx) => {
+        const isSelected = selected === idx;
+        const baseCls = isSelected
+          ? 'border-blue-700 bg-blue-50 text-blue-950 ring-1 ring-blue-700'
+          : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 text-slate-800';
+        const badgeCls = isSelected
+          ? 'bg-blue-800 text-white border-blue-800'
+          : 'bg-slate-100 text-slate-700 border-slate-200';
+        return `
+          <button type="button" data-qid="${q.id}" data-opt="${idx}"
+            class="opt-btn w-full text-left p-3.5 rounded-xl border ${baseCls} flex items-center gap-3 transition cursor-pointer">
+            <span class="w-7 h-7 rounded-lg border ${badgeCls} flex items-center justify-center text-xs font-bold shrink-0">
+              ${OPTION_LABELS[idx]}
+            </span>
+            <span class="text-sm sm:text-base font-medium leading-snug">${opt}</span>
+          </button>
+        `;
+      }).join('');
+
+      singleQuestionCard.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-900 border border-blue-200 text-xs font-bold tabular-nums">
+              प्रश्न ${q.id} / ${QUESTIONS.length}
+            </span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">
+              ${SECTION_LABELS[q.section]}
+            </span>
+          </div>
+          <span class="text-xs font-medium text-amber-800 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-lg">
+            टॉपिक: ${q.chapter}
+          </span>
+        </div>
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 leading-relaxed mb-5">${q.question}</h2>
+        <div class="space-y-2.5">${optionsHtml}</div>
+      `;
+
+      prevBtn.disabled = state.currentFilteredIndex === 0;
+      nextBtn.disabled = state.currentFilteredIndex === filtered.length - 1;
+      clearChoiceBtn.disabled = selected === undefined;
+      clearChoiceBtn.classList.toggle('opacity-40', selected === undefined);
+
+      paletteGrid.innerHTML = filtered.map((item, fIdx) => {
+        const isCurrent = fIdx === state.currentFilteredIndex;
+        const isSolved = state.answers[item.id] !== undefined;
+        let cls = 'bg-slate-100 text-slate-700 hover:bg-slate-200';
+        if (isSolved) cls = 'bg-emerald-600 text-white hover:bg-emerald-700';
+        if (isCurrent) cls += ' ring-2 ring-blue-700 ring-offset-1';
+        return `
+          <button type="button" data-fidx="${fIdx}"
+            class="pal-btn h-9 rounded-lg text-xs font-bold tabular-nums transition cursor-pointer ${cls}">
+            ${item.id}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderListView(filtered) {
+      if (filtered.length === 0) {
+        listViewContainer.innerHTML = `
+          <div class="bg-white rounded-2xl border border-slate-200 p-8 text-center text-sm text-slate-500">
+            इस फ़िल्टर में कोई प्रश्न नहीं मिला।
+          </div>
+        `;
+        return;
+      }
+
+      listViewContainer.innerHTML = filtered.map(q => {
+        const userAns = state.answers[q.id];
+        const isResult = state.mode === 'result';
+
+        let statusBadge = '';
+        if (isResult) {
+          if (userAns === q.answerIndex) {
+            statusBadge = `<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">सही (+1)</span>`;
+          } else if (userAns === undefined) {
+            statusBadge = `<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600">छोड़ा गया (0)</span>`;
+          } else {
+            statusBadge = `<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-800">गलत (0)</span>`;
+          }
+        }
+
+        const optionsHtml = q.options.map((opt, idx) => {
+          let cls = 'border-slate-200 bg-white text-slate-800';
+          let badgeCls = 'bg-slate-100 text-slate-700 border-slate-200';
+
+          if (isResult) {
+            if (idx === q.answerIndex) {
+              cls = 'border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold';
+              badgeCls = 'bg-emerald-600 text-white border-emerald-600';
+            } else if (userAns === idx && idx !== q.answerIndex) {
+              cls = 'border-rose-400 bg-rose-50 text-rose-950';
+              badgeCls = 'bg-rose-600 text-white border-rose-600';
+            }
+          } else if (userAns === idx) {
+            cls = 'border-blue-700 bg-blue-50 text-blue-950 ring-1 ring-blue-700';
+            badgeCls = 'bg-blue-800 text-white border-blue-800';
+          }
+
+          return `
+            <button type="button" data-qid="${q.id}" data-opt="${idx}" ${isResult ? 'disabled' : ''}
+              class="opt-btn w-full text-left p-3 rounded-xl border ${cls} flex items-center gap-3 transition ${isResult ? 'cursor-default' : 'cursor-pointer hover:bg-slate-50'}">
+              <span class="w-6 h-6 rounded-md border ${badgeCls} flex items-center justify-center text-xs font-bold shrink-0">
+                ${OPTION_LABELS[idx]}
+              </span>
+              <span class="text-sm leading-snug">${opt}</span>
+            </button>
+          `;
+        }).join('');
+
+        const explanationHtml = isResult ? `
+          <div class="mt-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-700">
+            <span class="font-bold text-slate-900">व्याख्या:</span> ${q.explanation}
+          </div>
+        ` : '';
+
+        return `
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-900 border border-blue-200 text-xs font-bold tabular-nums">Q.${q.id}</span>
+                <span class="text-xs font-semibold text-slate-500">${SECTION_LABELS[q.section]} • ${q.chapter}</span>
+              </div>
+              ${statusBadge}
+            </div>
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 mb-3 leading-relaxed">${q.question}</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${optionsHtml}</div>
+            ${explanationHtml}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openSubmitModal() {
+      const solvedCount = Object.keys(state.answers).length;
+      modalSummaryText.textContent = `आपने ${QUESTIONS.length} में से ${solvedCount} प्रश्नों के उत्तर दिए हैं। क्या आप टेस्ट समाप्त कर परिणाम देखना चाहते हैं?`;
+      confirmModal.classList.remove('hidden');
+    }
+
+    function submitTest() {
+      confirmModal.classList.add('hidden');
+      state.mode = 'result';
+      state.elapsedSecondsOnSubmit = (90 * 60) - state.secondsRemaining;
+      if (timerInterval) clearInterval(timerInterval);
+
+      let correct = 0;
+      let wrong = 0;
+      let skipped = 0;
+      const secCounts = { science: 0, social: 0, maths: 0 };
+
+      QUESTIONS.forEach(q => {
+        const ans = state.answers[q.id];
+        if (ans === undefined) {
+          skipped++;
+        } else if (ans === q.answerIndex) {
+          correct++;
+          secCounts[q.section]++;
+        } else {
+          wrong++;
+        }
+      });
+
+      const pct = Math.round((correct / QUESTIONS.length) * 100);
+      scoreStudentNameBadge.textContent = `छात्र: ${state.studentName}`;
+      document.getElementById('scoreHeadline').textContent = `${correct} / ${QUESTIONS.length} अंक`;
+      document.getElementById('scoreSubtext').textContent = `सटीकता: ${pct}% • लिया गया समय: ${formatTime(state.elapsedSecondsOnSubmit)}`;
+      document.getElementById('statCorrect').textContent = correct;
+      document.getElementById('statWrong').textContent = wrong;
+      document.getElementById('statSkipped').textContent = skipped;
+      document.getElementById('statPercent').textContent = `${pct}%`;
+      document.getElementById('secScoreScience').textContent = `${secCounts.science} / 35`;
+      document.getElementById('secScoreSocial').textContent = `${secCounts.social} / 35`;
+      document.getElementById('secScoreMaths').textContent = `${secCounts.maths} / 20`;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      render();
+    }
+
+    function retakeTest() {
+      state.answers = {};
+      state.mode = 'test';
+      state.activeSection = 'all';
+      state.reviewFilter = 'all';
+      state.currentFilteredIndex = 0;
+      state.secondsRemaining = 90 * 60;
+      state.timerPaused = false;
+      timerDisplay.textContent = formatTime(state.secondsRemaining);
+      timerDisplay.classList.remove('text-rose-600');
+      timerToggleBtn.textContent = 'रोकें';
+      startTimer();
+      render();
+    }
+
+    function render() {
+      updateProgress();
+
+      document.querySelectorAll('.sec-btn').forEach(btn => {
+        const active = btn.dataset.section === state.activeSection;
+        btn.className = active
+          ? 'sec-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-900 text-white transition cursor-pointer whitespace-nowrap'
+          : 'sec-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition cursor-pointer whitespace-nowrap';
+      });
+
+      document.querySelectorAll('.rfilter-btn').forEach(btn => {
+        const active = btn.dataset.rfilter === state.reviewFilter;
+        btn.className = active
+          ? 'rfilter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-blue-900 text-white cursor-pointer'
+          : 'rfilter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer';
+      });
+
+      const filtered = getFilteredQuestions();
+
+      if (state.mode === 'result') {
+        resultSection.classList.remove('hidden');
+        singleViewContainer.classList.add('hidden');
+        listViewContainer.classList.remove('hidden');
+        viewToggleGroup.classList.add('hidden');
+        timerToggleBtn.classList.add('hidden');
+        topActionBtn.textContent = 'फिर से टेस्ट दें';
+        renderListView(filtered);
+      } else {
+        resultSection.classList.add('hidden');
+        viewToggleGroup.classList.remove('hidden');
+        timerToggleBtn.classList.remove('hidden');
+        topActionBtn.textContent = 'सबमिट करें';
+
+        if (state.viewMode === 'single') {
+          modeSingleBtn.className = 'px-2 py-1 rounded-md text-xs font-semibold bg-white text-blue-900 shadow-sm cursor-pointer';
+          modeListBtn.className = 'px-2 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 cursor-pointer';
+          singleViewContainer.classList.remove('hidden');
+          listViewContainer.classList.add('hidden');
+          renderSingleView(filtered);
+        } else {
+          modeListBtn.className = 'px-2 py-1 rounded-md text-xs font-semibold bg-white text-blue-900 shadow-sm cursor-pointer';
+          modeSingleBtn.className = 'px-2 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 cursor-pointer';
+          singleViewContainer.classList.add('hidden');
+          listViewContainer.classList.remove('hidden');
+          renderListView(filtered);
+        }
+      }
+    }
+
+    function beginTest() {
+      const nameVal = studentNameInput.value.trim();
+      if (!nameVal) {
+        nameError.classList.remove('hidden');
+        studentNameInput.focus();
+        return;
+      }
+      nameError.classList.add('hidden');
+      state.studentName = nameVal;
+      state.started = true;
+      headerStudentMeta.textContent = `छात्र: ${state.studentName} • Dir:- Aditya Kumar (90 प्रश्न)`;
+      startScreen.classList.add('hidden');
+      testHeader.classList.remove('hidden');
+      mainContent.classList.remove('hidden');
+      startTimer();
+      render();
+    }
+
+    startTestBtn.addEventListener('click', beginTest);
+    studentNameInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') beginTest();
+    });
+    studentNameInput.addEventListener('input', () => {
+      if (studentNameInput.value.trim()) nameError.classList.add('hidden');
+    });
+
+    document.querySelectorAll('.sec-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.activeSection = btn.dataset.section;
+        state.currentFilteredIndex = 0;
+        render();
+      });
+    });
+
+    document.querySelectorAll('.rfilter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.reviewFilter = btn.dataset.rfilter;
+        render();
+      });
+    });
+
+    modeSingleBtn.addEventListener('click', () => {
+      state.viewMode = 'single';
+      render();
+    });
+
+    modeListBtn.addEventListener('click', () => {
+      state.viewMode = 'list';
+      render();
+    });
+
+    singleQuestionCard.addEventListener('click', (e) => {
+      const btn = e.target.closest('.opt-btn');
+      if (!btn) return;
+      selectAnswer(Number(btn.dataset.qid), Number(btn.dataset.opt));
+    });
+
+    listViewContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.opt-btn');
+      if (!btn || state.mode !== 'test') return;
+      selectAnswer(Number(btn.dataset.qid), Number(btn.dataset.opt));
+    });
+
+    paletteGrid.addEventListener('click', (e) => {
+      const btn = e.target.closest('.pal-btn');
+      if (!btn) return;
+      state.currentFilteredIndex = Number(btn.dataset.fidx);
+      render();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (state.currentFilteredIndex > 0) {
+        state.currentFilteredIndex--;
+        render();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      const filtered = getFilteredQuestions();
+      if (state.currentFilteredIndex < filtered.length - 1) {
+        state.currentFilteredIndex++;
+        render();
+      }
+    });
+
+    clearChoiceBtn.addEventListener('click', () => {
+      const filtered = getFilteredQuestions();
+      const q = filtered[state.currentFilteredIndex];
+      if (q && state.answers[q.id] !== undefined) {
+        delete state.answers[q.id];
+        render();
+      }
+    });
+
+    timerToggleBtn.addEventListener('click', () => {
+      state.timerPaused = !state.timerPaused;
+      timerToggleBtn.textContent = state.timerPaused ? 'शुरू करें' : 'रोकें';
+    });
+
+    topActionBtn.addEventListener('click', () => {
+      if (state.mode === 'test') openSubmitModal();
+      else retakeTest();
+    });
+
+    sidebarSubmitBtn.addEventListener('click', openSubmitModal);
+    retakeBtn.addEventListener('click', retakeTest);
+    modalCancelBtn.addEventListener('click', () => confirmModal.classList.add('hidden'));
+    modalConfirmBtn.addEventListener('click', submitTest);
+
+    render();
+  </script>
+</body>
+</html>
